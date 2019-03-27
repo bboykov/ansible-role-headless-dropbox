@@ -1,0 +1,32 @@
+---
+- name: Install dropbox daemon.
+  unarchive:
+    src: https://www.dropbox.com/download?plat=lnx.x86_64
+    dest: $HOME
+    remote_src: true
+  become: false
+
+- name: Download the Dropbox control script
+  get_url:
+    url: https://www.dropbox.com/download?dl=packages/dropbox.py
+    dest: /usr/local/bin/dropbox
+    mode: 0755
+
+- name: Ensure dropbox systemd unit file is available.
+  template:
+    src: dropbox.service.j2
+    dest: /etc/systemd/system/dropbox.service
+    mode: 0644
+
+- name: Enable Dropbox service
+  systemd:
+    name: dropbox
+    state: stopped
+    enabled: true
+    daemon_reload: true
+
+- debug:
+    msg: "1. Run the daemon manually `~/.dropbox-dist/dropboxd` to login"
+
+- debug:
+    msg: "2. Start the service `sudo systemctl start dropbox`"
