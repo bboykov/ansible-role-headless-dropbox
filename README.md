@@ -1,5 +1,7 @@
-Role Name
+Ansible Role: Headless Dropbox
 =========
+
+[![Build Status](https://travis-ci.org/bboykov/ansible-role-headless-dropbox.svg?branch=master)](https://travis-ci.org/bboykov/ansible-role-headless-dropbox)
 
 A role to configure [headless dropbox](headless-dropbox). The configuration is simular to [this
 post][the-blog-post].
